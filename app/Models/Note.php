@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Note extends Model
 {
     use HasFactory;
-    protected $filable = ['title', 'body', 'user_id'];
+    protected $fillable = ['title', 'body', 'user_id'];
 
 
     public function user(): BelongsTo

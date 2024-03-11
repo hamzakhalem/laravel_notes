@@ -18,8 +18,14 @@
         
                 <div>
                     <x-input-label for="title" :value="__('title')" />
-                    <x-text-input id="title" title="title" type="text" class="mt-1 block w-full" required autofocus autocomplete="title" />
+                    <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" required autofocus autocomplete="title" />
                     <x-input-error class="mt-2" :messages="$errors->get('title')" />
+                </div>
+        
+                <div>
+                    <x-input-label for="title" :value="__('body')" />
+                    <x-textarea-input id="body" name="body" type="text" class="mt-1 block w-full"></x-textarea-input>
+                    <x-input-error class="mt-2" :messages="$errors->get('body')" />
                 </div>
         
                 <div class="flex items-center gap-4">
