@@ -15,7 +15,9 @@ class NoteController extends Controller
     {
 
         //
-        $notes = Note::all(); 
+        // $notes = Note::all(); 
+        // $notes = Note::where('user_id', auth()->id())->get(); 
+        $notes = Note::whereUserId(auth()->id())->latest()->paginate(5);
         return view('notes.index', compact('notes'));
     }
 
