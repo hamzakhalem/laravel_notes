@@ -6,14 +6,8 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-              <h3 class="text-center text-gray-100 text-white ">
-                All notes
-              </h3>
-        </div>
-    </div>
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+        <a class=" dark:bg-gray-700  text-gray-500 p-2 sm:rounded-lg " style="margin-left: 10%;  " href="{{ route('notes.create') }}">Create +</a>
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-4">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 
 
@@ -49,7 +43,7 @@
                                         {{$item->title }}
                                     </td>
                                     <td class="px-6 py-4 text-center">
-                                        {{$item->body }}
+                                        {{ Str::limit($item->body , 15, '...')}}
                                     </td>
                                     <td class="px-6 py-4 text-center">
                                         {{$item->created_at->diffForHumans() }}
