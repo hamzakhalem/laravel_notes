@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Note;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\Rule;
 
 class NoteController extends Controller
 {
@@ -44,7 +45,7 @@ class NoteController extends Controller
         ]);
 
         $request->user()->notes()->create($validated);
-        dd('created');
+        return redirect(route('notes.index'))->with('success', 'Note Created');
     }
 
     /**
@@ -63,6 +64,7 @@ class NoteController extends Controller
     public function edit(Note $note)
     {
         //
+        $this->authorize('update', $note);
         $title = 'Edit Note';
         return view('notes.edit', compact('note','title'));
     }
@@ -73,6 +75,14 @@ class NoteController extends Controller
     public function update(Request $request, Note $note)
     {
         //
+        $this->authorize('update', $note);
+        $validated = $request->validate([
+            'title' => ['required','string','min:5','max:255',Rule::unique('notes')->ignore($note->id)],
+            'body' => 'required|string|min:10'
+        ]);
+
+        $note->update($validated);
+        return redirect(route('notes.index'))->with('success', 'Note Updated');
     }
 
     /**
