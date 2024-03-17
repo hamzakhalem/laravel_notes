@@ -91,5 +91,8 @@ class NoteController extends Controller
     public function destroy(Note $note)
     {
         //
+        $this->authorize('delete', $note);
+        $note->delete();
+        return redirect(route('notes.index'))->with('success', 'Note Deleted');
     }
 }
