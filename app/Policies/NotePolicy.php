@@ -19,8 +19,7 @@ class NotePolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Note $note): bool
-    {
+    public function view(User $user, Note $note): bool{
         //
         return $note->user()->is($user);
     }
